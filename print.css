@@ -1,0 +1,15 @@
+html, body {
+    font-family: 'Merriweather', serif;
+    //font-size: 12pt;
+}
+a {
+    color: #000;
+}
+div#picture {
+    float: right;
+    margin: 1em;
+}
+h1, h2, h3, h4 {
+    font-family: 'Alegreya', serif;
+    font-weight: normal;
+}

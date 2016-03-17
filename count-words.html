@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function containsThreeEqualNumbers(a,b,c,d,e,f) {
+    if((a==b && b==c) || (a==b && b==d) || (a==b && b==e) || (a==b && b==f) ||
+       (a==c && c==d) || (a==c && c==e) || (a==c && c==f) ||
+       (a==d && d==e) || (a==d && d==f) ||
+       (a==e && e==f))
+        return 1;
+    if((b==c && c==d) || (b==c && c==e) || (b==c && c==f) ||
+       (b==d && d==e) || (b==d && d==f) ||
+       (b==e && e==f))
+        return 1;
+    if((c==d && d==e) || (c==d && d==f) || (c==e && e==f))
+        return 1;
+    if(d==e && e==f)
+        return 1;
+    return 0;
+}
+function solveExercise1()
+{
+    var count = 0;
+    for(var a=0;a<26;a++) {
+        for(var b=0;b<26;b++) {
+            for(var c=0;c<26;c++) {
+                for(var d=0;d<26;d++) {
+                    for(var e=0;e<26;e++) {
+                        for(var f=0;f<26;f++) {
+                            if(!containsThreeEqualNumbers(a,b,c,d,e,f)) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    document.getElementById("answer").innerHTML=count;
+}
+</script>
+<title>Zesletterwoorden tellen</title>
+</head>
+<body>
+
+<h1>Hoeveel 6-letterwoorden zijn er die elke letter hoogstens twee keer bevatten?</h1>
+<p>Antwoord: <span id="answer">(klik op de knop om te berekenen)</span></p>
+<button type="button" onclick="solveExercise1()">Bereken</button>
+<p>Bovenstaande knop lost de vraag op met brute rekenkracht. Dit kan eventjes duren.</p> 
+
+<p>Laat ons de vraag ook eens oplossen met de hand. Er zijn 308915776 lettercombinaties van 6 letters lang. We gaan hiervan de lettercombinaties aftrekken waarin minstens één letter minstens drie keer voorkomt, en hierbij onderscheiden we gevallen naargelang het aantal keren dat de meest voorkomende letter voorkomt.</p>
+<p><b>Zesvoudig (26).</b> Er zijn 26 dergelijke combinaties.</p>
+<p><b>Vijfvoudig (3900).</b> Om dergelijke combinatie te maken, kiezen we de vijfvoudig voorkomende letter (26 keuzes), de letter die één keer voorkomt (25 keuzes) en een positie voor de letter die maar één keer voorkomt (6 keuzes). We vinden dat er 3900 combinaties zijn van dit type.</p>
+<p><b>Viervoudig (243750).</b> Dit vraagt al wat meer werk.</p>
+<p>Om te beginnen zou het kunnen dat de twee overblijvende letters gelijk zijn. Er zijn dan 26 keuzes voor de letter die vier keer voorkomt, 25 voor de letter die twee keer voorkomt en 15 keuzes voor de locaties van de letter die twee keer voorkomt. Dit levert 9750 combinaties op waarbij één letter vier keer voorkomt en een andere twee keer.</p>
+<p>Het zou ook kunnen dat de twee overblijvende letters verschillen. We hebben dan 26 keuzes voor de letter die vier keer voorkomt, 15 keuzes voor de twee locaties van de overblijvende letters, 25 keuzes voor de linkse van de twee overblijvende letters en 24 keuzes voor de rechtse van de twee overblijvende letters. Dit levert een totaal op van 234000 combinaties waarbij één letter vier keer voorkomt en de andere twee letters verschillen.
+<p><b>Drievoudig (8118500).</b> Ook dit vraagt verder gevalsonderscheid.</p>
+<p>We bekijken eerst het geval waarim er twee letters drievoudig voorkomen. Er zijn 325 manieren om 2 verschillende letters te kiezen. Daarenboven zijn er 20 manieren om de drie posities te kiezen van de letter die alfabetisch gezien het eerst komt. We besluiten dat er 6500 combinaties zijn waarbij twee letters drievoudig voorkomen.</p>
+<p>Nu bekijken we het geval waarin één letter drievoudig voorkomt, één letter dubbel en één letter enkelvoudig. We hebben 26 keuzes om de drievoudig voorkomende letter te kiezen. We hebben 25 keuzes om de dubbel voorkomende letter te kiezen. We hebben 24 keuzes om de enkelvoudig voorkomende letter te kiezen. Daarbenboven hebben we 20 keuzes voor de locaties van de meest voorkomende letter, en dan nog 3 keuzes voor de locatie van de enkelvoudig voorkomende letter. We besluiten dat er 936000 combinaties zijn waarbij één letter drievoudig voorkomt, één letter dubbel en één letter enkelvoudig.</p>
+<p>Ten slotte bekijken we het geval waarin één letter drievoudig voorkomt en de andere drie letters verschillend zijn. Er zijn 26 keuzes voor de drievoudig voorkomende letter. Dan zijn er 20 keuzes voor de locaties van deze letter. Er zijn nog 25 keuzes voor de meest linkse van de overblijvende letters, 24 voor de middelste en 23 voor de meest rechtse van de overblijvende posities. We besluiten dat er 7176000 combinaties zijn waarbij één letter drievoudig voorkomt en de overige letters allemaal verschillen.</p>
+<p><b>De oplossing.</b> Het antwoord op de vraag is dus 308915776-26-3900-243750-8118500=300549600.</p>
+</body>
+</html> 
